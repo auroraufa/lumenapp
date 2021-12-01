@@ -22,15 +22,16 @@ $router->get('/data', function () use ($router) {
     return response()->json($results);
 });
 
-$router->get('/api/users', function () use ($router) {
-    $results = app('db')->select("SELECT * FROM users");
-    return response()->json($results);
-});
+
 
 $router->post('/register', 'UserController@register');
 $router->post('/login','AuthController@login');
 
 
 $router->group(['middleware' => 'auth'], function() use ($router){
+    $router->get('/api/users', function () use ($router) {
+    $results = app('db')->select("SELECT * FROM users");
+    return response()->json($results);
+});
     $router->post('/logout', 'AuthController@logout');
 });
