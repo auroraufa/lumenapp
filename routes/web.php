@@ -14,7 +14,7 @@
 */
 
 $router->get('/', function () use ($router) {
-    return ["Hello Hai..!!!"];
+    return ["Hello Guys!!!"];
 });
 
 $router->get('/data', function () use ($router) {
