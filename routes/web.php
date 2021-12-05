@@ -17,7 +17,7 @@ $router->get('/', function () use ($router) {
     return ["Hello Guys!!!"];
 });
 
-$router->get('/data', function () use ($router) {
+$router->get('/users', function () use ($router) {
     $results = app('db')->select("SELECT * FROM users");
     return response()->json($results);
 });
