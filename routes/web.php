@@ -21,6 +21,10 @@ $router->get('/users', function () use ($router) {
     $results = app('db')->select("SELECT * FROM users");
     return response()->json($results);
 });
+$router->get('/event', function () use ($router) {
+    $results = app('db')->select("SELECT * FROM event");
+    return response()->json($results);
+});
 
 
 $router->post('/register', 'UserController@register');
