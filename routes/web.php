@@ -23,14 +23,19 @@ $router->get('/users', function () use ($router) {
 });
 
 
-
 $router->post('/register', 'UserController@register');
 $router->post('/login','AuthController@login');
+$router->post('/addpost', 'UserController@addpost');
 
 
 $router->group(['middleware' => 'auth'], function() use ($router){
     $router->get('/api/users', function () use ($router) {
     $results = app('db')->select("SELECT * FROM users");
+    return response()->json($results);
+});
+$router->group(['middleware' => 'auth'], function() use ($router){
+    $router->get('/api/event', function () use ($router) {
+    $results = app('db')->select("SELECT * FROM event");
     return response()->json($results);
 });
     $router->post('/logout', 'AuthController@logout');
