@@ -15,12 +15,10 @@ class EventController extends Controller
 
     public function show($jenis)
     {
-   
+
         $eventList = new stdClass();
-        $events = Event::where('jenis', $jenis) -> select ('jenis', 'kategori_id', 'nama_event', 'date')->get();
-        $eventList-> event= $events;
+        $events = Event::join('kategoris', 'kategoris.id', '=', 'events.kategori_id')->where('jenis', $jenis)->select('jenis', 'kategori_id', 'nama_event', 'date')->get();
+        $eventList->event = $events;
         return response()->json($eventList);
     }
-
-
 }
