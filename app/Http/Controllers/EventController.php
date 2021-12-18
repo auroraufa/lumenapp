@@ -28,6 +28,6 @@ class EventController extends Controller
         $eventList = new stdClass();
         $favorite = KategoriUser::where('user_id', $id)->select('kategori_id')->pluck('kategori_id');
         dd($favorite);
-        return response()->json($eventList);
+        return response()->json($favorite);
     }
 }
