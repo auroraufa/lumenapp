@@ -26,7 +26,7 @@ class EventController extends Controller
     public function favorite($id)
     {
         $eventList = new stdClass();
-        $favorite = KategoriUser::where('user_id', $id)->select('kategori_id')->toArray();
+        $favorite = KategoriUser::where('user_id', $id)->select('kategori_id')->pluck('kategori_id');
         dd($favorite);
         return response()->json($eventList);
     }
