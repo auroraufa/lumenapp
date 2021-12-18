@@ -30,6 +30,7 @@ $router->get('/event', function () use ($router) {
 $router->post('/register', 'UserController@register');
 $router->post('/login', 'AuthController@login');
 $router->get('/api/favorite/{id}', 'EventController@favorite');
+$router->get('/api/myevent/{user_id}/{jenis}', 'EventController@myevent');
 
 
 $router->group(['middleware' => 'auth'], function () use ($router) {
