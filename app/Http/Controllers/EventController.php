@@ -17,7 +17,7 @@ class EventController extends Controller
     {
 
         $eventList = new stdClass();
-        $events = Event::join('kategoris', 'kategoris.id', '=', 'events.kategori_id')->where('jenis', $jenis)->select('jenis', 'kategori_id', 'nama_event', 'date')->get();
+        $events = Event::join('kategoris', 'kategoris.id', '=', 'events.kategori_id')->where('jenis', $jenis)->select('jenis', 'kategoris.nama', 'nama_event', 'date')->get();
         $eventList->event = $events;
         return response()->json($eventList);
     }
