@@ -17,9 +17,6 @@ class EventController extends Controller
     {
    
         $eventList = new stdClass();
-         return response()->json([
-            'message' => 'Masuk kesini kok'
-        ]);
         $events = Event::where('jenis', $jenis) -> select ('jenis', 'kategori_id', 'nama_event', 'date')->get();
         $eventList-> event= $events;
         return response()->json($eventList);
