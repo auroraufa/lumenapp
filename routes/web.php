@@ -28,16 +28,14 @@ $router->get('/event', function () use ($router) {
 
 
 $router->post('/register', 'UserController@register');
-$router->post('/login','AuthController@login');
+$router->post('/login', 'AuthController@login');
 
 
-$router->group(['middleware' => 'auth'], function() use ($router){
+$router->group(['middleware' => 'auth'], function () use ($router) {
     $router->get('/api/users', function () use ($router) {
-    $results = app('db')->select("SELECT * FROM users");
-    return response()->json($results);
-        
-    $router->get('/api/seminar/{jenis}','EventController@show');
-
-});
+        $results = app('db')->select("SELECT * FROM users");
+        return response()->json($results);
+    });
+    $router->get('/api/seminar/{jenis}', 'EventController@show');
     $router->post('/logout', 'AuthController@logout');
 });
