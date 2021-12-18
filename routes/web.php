@@ -22,7 +22,7 @@ $router->get('/users', function () use ($router) {
     return response()->json($results);
 });
 $router->get('/event', function () use ($router) {
-    $results = app('db')->select("SELECT * FROM event");
+    $results = app('db')->select("SELECT * FROM events");
     return response()->json($results);
 });
 
@@ -35,6 +35,8 @@ $router->group(['middleware' => 'auth'], function() use ($router){
     $router->get('/api/users', function () use ($router) {
     $results = app('db')->select("SELECT * FROM users");
     return response()->json($results);
+
+    $router->get('/api/seminar/{jenis}','EventController@show');
 });
     $router->post('/logout', 'AuthController@logout');
 });
