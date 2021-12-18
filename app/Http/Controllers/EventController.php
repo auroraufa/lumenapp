@@ -27,7 +27,8 @@ class EventController extends Controller
     {
         $eventList = new stdClass();
         $favorite = KategoriUser::where('user_id', $id)->select('kategori_id')->pluck('kategori_id');
-        dd($favorite);
-        return response()->json($favorite);
+        $events = Event::join('kategoris', 'kategoris.id', '=', 'events.kategori_id')->whereIn('kategori_id', $favorite)->select('jenis', 'kategoris.nama', 'nama_event', 'date')->get();
+        $eventList->favorite = $events;
+        return response()->json($eventList);
     }
 }
