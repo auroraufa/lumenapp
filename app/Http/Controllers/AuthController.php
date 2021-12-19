@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
@@ -37,9 +38,14 @@ class AuthController extends Controller
         return response()->json($user);
     }
 
-    public function logout(Request $request){
-        $user = \Auth::user();
-        $user->token = null;
+    public function logout(Request $request)
+    {
+        $auth = Auth::user();
+
+        $user = User::where('id', $auth->id)->first();
+        $user->update([
+            'token' => null
+        ]);
         $user->save();
 
         return response()->json(['message' => 'Pengguna telah logout']);

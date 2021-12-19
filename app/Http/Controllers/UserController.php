@@ -8,7 +8,8 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    public function register(Request $request){
+    public function register(Request $request)
+    {
         $this->validate($request, [
             'email' => 'required|unique:users|email',
             'username' => 'required',
@@ -26,5 +27,4 @@ class UserController extends Controller
 
         return response()->json(['message' => 'Pendaftaran pengguna berhasil dilaksanakan']);
     }
-    
 }
