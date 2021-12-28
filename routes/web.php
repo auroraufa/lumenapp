@@ -2,6 +2,8 @@
 
 /** @var \Laravel\Lumen\Routing\Router $router */
 
+use App\Http\Controllers\KategoriController;
+
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -40,4 +42,5 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
     });
     $router->get('/api/seminar/{jenis}', 'EventController@show');
     $router->post('/logout', 'AuthController@logout');
+    $router->get('/api/kategori', 'KategoriController@getkategori');
 });
