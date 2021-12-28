@@ -18,13 +18,19 @@ class UserController extends Controller
         $email = $request->input('email');
         $username = $request->input('username');
         $password = Hash::make($request->input('password'));
+        $generateToken = bin2hex(random_bytes(40));
 
         $user = User::create([
             'email' => $email,
             'username' => $username,
-            'password' => $password
+            'password' => $password,
+            'token' => $generateToken
         ]);
 
-        return response()->json(['message' => 'Pendaftaran pengguna berhasil dilaksanakan']);
+        return response()->json([
+            'message' => 'Pendaftaran pengguna berhasil dilaksanakan',
+            'token' => $user->token,
+            'idUser' => $user->id
+        ]);
     }
 }
