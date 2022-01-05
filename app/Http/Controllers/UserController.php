@@ -39,13 +39,11 @@ class UserController extends Controller
     public function addKategrori(Request $request)
     {
         $auth = Auth::user();
-        $user = User::where('id', $auth->id)->first();
 
         $this->validate($request, [
-            'user_id' => $user,
             'kategori' => 'required'
         ]);
-        $user_id = $request->get('user_id');
+        $user_id = $auth->id;
         $kategori = $request->input('kategori');
 
         $kategori_user = KategoriUser::create([
