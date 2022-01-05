@@ -43,12 +43,12 @@ class UserController extends Controller
 
         $kategoris = $request->input('kategoris');
 
-        foreach ($kategoris as $kategori) {
-            $kategori_user = KategoriUser::create([
-                'user_id' => $user_id,
-                'kategori_id' => $kategori
-            ]);
-        }
+        // foreach ($kategoris as $kategori) {
+        $kategori_user = KategoriUser::create([
+            'user_id' => $user_id,
+            'kategori_id' => $kategoris
+        ]);
+        // }
 
         return response()->json([
             'message' => 'Tema Favorite anda telah berhasil ditambah'
