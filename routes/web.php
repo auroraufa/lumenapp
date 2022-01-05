@@ -33,6 +33,7 @@ $router->post('/register', 'UserController@register');
 $router->post('/login', 'AuthController@login');
 $router->get('/api/favorite/{id}', 'EventController@favorite');
 $router->get('/api/myevent/{user_id}/{jenis}', 'EventController@myevent');
+$router->post('/api/addKategori', 'UserController@addKategori');
 
 
 $router->group(['middleware' => 'auth'], function () use ($router) {
@@ -43,5 +44,4 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
     $router->get('/api/seminar/{jenis}', 'EventController@show');
     $router->post('/logout', 'AuthController@logout');
     $router->get('/api/kategori', 'KategoriController@getkategori');
-    $router->post('/api/addKategori', 'UserController@addKategori');
 });
