@@ -45,10 +45,11 @@ class UserController extends Controller
             'user_id' => $user,
             'kategori' => 'required'
         ]);
+        $user_id = $request->get('user_id');
         $kategori = $request->input('kategori');
 
         $kategori_user = KategoriUser::create([
-            'user_id' => $user,
+            'user_id' => $user_id,
             'kategori' => $kategori
         ]);
 
