@@ -36,20 +36,17 @@ class UserController extends Controller
         ]);
     }
 
-    public function addKategrori(Request $request)
+    public function addKategrori(Request $request, $kategoris)
     {
         $auth = Auth::user();
-
-        $this->validate($request, [
-            'kategori' => 'required'
-        ]);
         $user_id = $auth->id;
-        $kategori = $request->input('kategori');
 
-        $kategori_user = KategoriUser::create([
-            'user_id' => $user_id,
-            'kategori' => $kategori
-        ]);
+        foreach ($kategoris as $kategori) {
+            $kategori_user = KategoriUser::create([
+                'user_id' => $user_id,
+                'kategori_id' => $kategori
+            ]);
+        }
 
         return response()->json([
             'message' => 'Tema Favorite anda telah berhasil ditambah'
