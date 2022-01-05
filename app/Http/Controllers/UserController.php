@@ -36,7 +36,7 @@ class UserController extends Controller
         ]);
     }
 
-    public function addKategrori(Request $request)
+    public function addKategori(Request $request)
     {
         $auth = Auth::user();
         $user_id = $auth->id;
