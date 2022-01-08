@@ -44,4 +44,5 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
     $router->post('/logout', 'AuthController@logout');
     $router->get('/api/kategori', 'KategoriController@getkategori');
     $router->post('/api/addKategori', 'UserController@addKategori');
+    $router->get('api/showName/{id}', 'UserController@showName');
 });

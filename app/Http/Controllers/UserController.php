@@ -54,4 +54,11 @@ class UserController extends Controller
             'message' => 'Tema Favorite anda telah berhasil ditambah'
         ]);
     }
+    public function showName($id)
+    {
+        $showUser = new \stdClass();
+        $data2 = User::where('id', $id)->select('nama')->get();
+        $showUser->user = $data2;
+        return response()->json($showUser);
+    }
 }

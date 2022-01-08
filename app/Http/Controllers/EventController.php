@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Event;
 use App\Models\KategoriUser;
+use App\Models\User;
 use App\Models\UserEvent;
 use stdClass;
 
