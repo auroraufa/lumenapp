@@ -21,7 +21,7 @@ class EventController extends Controller
     public function show($jenis,Request $request)
     {
         $eventList = new stdClass();
-        $search = $request->input('seacrh');
+        $search = $request->input('search');
         if($search==null){
             $search ='';
         }
