@@ -63,4 +63,20 @@ class UserController extends Controller
         $showUser->user = $data2;
         return response()->json($showUser);
     }
+
+    public function EditProfile(Request $request, $id)
+    {
+        $this->validate($request, [
+            'nama' => 'required',
+            'email' => 'required'
+        ]);
+        $user = User::where('id', $id)->first();
+        $nama = $request->input('nama');
+        $email = $request->input('email');
+        $user->update([
+            'nama' => $nama,
+            'email' => $email
+        ]);
+        return response()->json(['message' => 'Berhasil edit data diri']);
+    }
 }
