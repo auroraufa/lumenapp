@@ -6,6 +6,7 @@ use App\Models\Event;
 use App\Models\KategoriUser;
 use App\Models\User;
 use App\Models\UserEvent;
+use Illuminate\Http\Request;
 use stdClass;
 
 class EventController extends Controller
@@ -16,10 +17,18 @@ class EventController extends Controller
      * @return void
      */
 
-    public function show($jenis)
+    public function show($jenis,Request $request)
     {
         $eventList = new stdClass();
-        $events = Event::join('kategoris', 'kategoris.id', '=', 'events.kategori_id')->where('jenis', $jenis)->select('jenis', 'kategoris.nama', 'nama_event', 'date')->get();
+        $search = $request->input('seacrh');
+        if($search==null){
+            $search ='';
+        }
+        $searchParam = '%'.$search.'%';
+        $events = Event::join('kategoris', 'kategoris.id', '=', 'events.kategori_id')
+        ->where('jenis', $jenis)
+        ->where('nama_event','like',$searchParam)
+        ->select('jenis', 'kategoris.nama', 'nama_event', 'date')->get();
         $eventList->event = $events;
         return response()->json($eventList);
     }
