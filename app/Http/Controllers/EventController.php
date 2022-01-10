@@ -18,7 +18,17 @@ class EventController extends Controller
      * @return void
      */
 
-    public function show($jenis,Request $request)
+    public function show($jenis)
+    {
+        $eventList = new stdClass();
+        $events = Event::join('kategoris', 'kategoris.id', '=', 'events.kategori_id')
+        ->where('jenis', $jenis)
+        ->select('jenis', 'kategoris.nama', 'nama_event', 'date')->get();
+        $eventList->event = $events;
+        return response()->json($eventList);
+    }
+
+    public function pencarian(Request $request)
     {
         $eventList = new stdClass();
         $search = $request->input('search');
@@ -27,7 +37,6 @@ class EventController extends Controller
         }
         $searchParam = '%'.$search.'%';
         $events = Event::join('kategoris', 'kategoris.id', '=', 'events.kategori_id')
-        ->where('jenis', $jenis)
         ->where('nama_event','like',$searchParam)
         ->select('jenis', 'kategoris.nama', 'nama_event', 'date')->get();
         $eventList->event = $events;

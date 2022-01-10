@@ -40,7 +40,8 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
         $results = app('db')->select("SELECT * FROM users");
         return response()->json($results);
     });
-    $router->post('/api/seminar/{jenis}', 'EventController@show');
+    $router->get('/api/seminar/{jenis}', 'EventController@show');
+    $router->post('/api/pencarian', 'EventController@pencarian');
     $router->post('/logout', 'AuthController@logout');
     $router->get('/api/kategori', 'KategoriController@getkategori');
     $router->post('/api/addKategori', 'UserController@addKategori');
