@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DetailEvent;
 use App\Models\Event;
 use App\Models\KategoriUser;
 use App\Models\User;
@@ -49,5 +50,16 @@ class EventController extends Controller
             ->where('user_id', $user_id)->where('event_users.jenis', $jenis)->select('events.jenis', 'kategoris.nama', 'nama_event', 'date')->get();
         $eventList->myevent = $myevent;
         return response()->json($eventList);
+    }
+
+    public function detailEvent($id)
+    {
+        $dEvent = new stdClass();
+        $event = DetailEvent::join('events', 'events.id', '=', 'detail_events.id')
+        ->join('kategoris', 'kategoris.id', '=', 'events.kategori_id')
+        ->where('detail_events.id',$id)
+        ->first();
+        $dEvent->detail_event = $event;
+        return response()->json($dEvent);
     }
 }
