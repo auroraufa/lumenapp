@@ -46,6 +46,6 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
     $router->get('/api/kategori', 'KategoriController@getkategori');
     $router->post('/api/addKategori', 'UserController@addKategori');
     $router->get('api/showName/{id}', 'UserController@showName');
-
     $router->get('api/detailEvent/{id}', 'EventController@detailEvent');
+    $router->post('/api/EditProfile/{id}', 'UserController@addKategori');
 });

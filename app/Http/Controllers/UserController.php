@@ -77,6 +77,6 @@ class UserController extends Controller
             'nama' => $nama,
             'email' => $email
         ]);
-        return response()->json(['message' => 'Berhasil edit data diri']);
+        return response()->json(['message' => 'Data diri berhasil di Edit']);
     }
 }
