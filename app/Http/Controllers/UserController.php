@@ -75,9 +75,9 @@ class UserController extends Controller
         $user = User::where('id', $id)->first();
         $nama = $request->input('nama');
         $email = $request->input('email');
-        $oldPassword = $request->input('newPassword');
+        $oldPassword = $request->input('oldPassword');
         if (Hash::check($oldPassword, $user->password)) {
-            $newPassword = Hash::make($oldPassword);
+            $newPassword = Hash::make($request->input('newPassword'));
             $user->update([
                 'password' => $newPassword,
                 'nama' => $nama,
