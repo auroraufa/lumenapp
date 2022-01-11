@@ -83,9 +83,9 @@ class UserController extends Controller
                 'nama' => $nama,
                 'email' => $email
             ]);
-            return response()->json(['message' => 'Berhasil ubah kata sandi']);
+            return response()->json(['message' => 'Berhasil Edit Data diri']);
         } else {
-            return response()->json(['message' => 'Kata sandi lama tidak sesuai'], 401);
+            return response()->json(['message' => 'Gagl merubah data diri'], 401);
         }
     }
 }
