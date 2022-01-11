@@ -69,6 +69,7 @@ class UserController extends Controller
         $this->validate($request, [
             'nama' => 'required',
             'email' => 'required',
+            'oldPassword' => 'required',
             'newPassword' => 'required'
         ]);
         $user = User::where('id', $id)->first();
