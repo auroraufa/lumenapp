@@ -68,15 +68,24 @@ class UserController extends Controller
     {
         $this->validate($request, [
             'nama' => 'required',
-            'email' => 'required'
+            'email' => 'required',
+            'oldPassword' => 'required',
+            'newPassword' => 'required'
         ]);
         $user = User::where('id', $id)->first();
         $nama = $request->input('nama');
         $email = $request->input('email');
-        $user->update([
-            'nama' => $nama,
-            'email' => $email
-        ]);
-        return response()->json(['message' => 'Data diri berhasil di Edit']);
+        $oldPassword = $request->input('oldPassword');
+        if (Hash::check($oldPassword, $user->password)) {
+            $newPassword = Hash::make($request->input('newPassword'));
+            $user->update([
+                'password' => $newPassword,
+                'nama' => $nama,
+                'email' => $email
+            ]);
+            return response()->json(['message' => 'Berhasil ubah kata sandi']);
+        } else {
+            return response()->json(['message' => 'Kata sandi lama tidak sesuai'], 401);
+        }
     }
 }
